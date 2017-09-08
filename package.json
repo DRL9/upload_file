@@ -1,0 +1,26 @@
+{
+  "name": "upload_file",
+  "version": "1.0.0",
+  "description": "upload files to server or PC",
+  "main": "server.js",
+  "scripts": {
+    "test": "null"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DRL9/upload_file.git"
+  },
+  "keywords": [
+    "upload"
+  ],
+  "author": "DRL9",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/DRL9/upload_file/issues"
+  },
+  "homepage": "https://github.com/DRL9/upload_file#readme",
+  "dependencies": {
+    "express": "^4.15.4",
+    "formidable": "^1.1.1"
+  }
+}
