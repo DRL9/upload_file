@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <div id="upload">
+        <div class="container">
+            <h4>待上传文件列表</h4>
+
+            <div class="panel panel-info" id="file-summary">
+                <div class="panel-body">
+                    暂无文件
+                </div>
+            </div>
+
+            <ul class="list-group" id="file-list">
+                <li class="list-group-item">
+                    <span class="file-name">文件文件文件文件文件文件</span>
+                    <span>
+                        <button class="btn-remove-file"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                    </span>
+                </li>
+            </ul>
+        </div>
+        <div class="btn-group btn-group-justified btn-upload-group">
+            <div class="btn-group">
+                <label for="input-file" class="btn btn-primary">添加文件
+                            <input id="input-file" type="file" multiple/>
+                    </label>
+            </div>
+            <div class="btn-group">
+                <button type="button" class="btn btn-success">开始上传</button>
+            </div>
+        </div>
+
+    </div>
+    <script src="./scripts/upload.js"></script>
+</body>
+
+</html>

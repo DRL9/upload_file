@@ -1,0 +1,44 @@
+#upload {
+    width: 100%;
+}
+
+.btn-upload-group {
+    position: fixed;
+    bottom: 0;
+}
+
+#input-file {
+    display: none;
+}
+
+.file-name {
+    display: inline-block;
+    width: 80%;
+    vertical-align: middle;
+}
+
+.file-name+span {
+    display: inline-block;
+    width: 17%;
+    text-align: center;
+}
+
+.btn-remove-file {
+    width: 1.8em;
+    height: 1.8em;
+    padding: 0;
+    border: 1px;
+    border-radius: 2em;
+    background: red;
+    color: white;
+}
+
+.btn-remove-file span {
+    vertical-align: middle;
+    padding-bottom: 1px;
+}
+
+#file-list {
+    max-height: 70%;
+    overflow: scroll
+}
