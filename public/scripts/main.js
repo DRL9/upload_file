@@ -1,6 +1,7 @@
 define([
-    './lib/upload'
-], function (require, factory) {
+    './lib/upload',
+    './lib/html_elements'
+], function () {
     'use strict';
 
 });

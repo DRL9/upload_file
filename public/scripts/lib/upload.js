@@ -1,11 +1,12 @@
-
 define([
-], function (require, factory) {
+    './html_elements'
+], function (elements) {
     'use strict';
-    var inputFileBtn = document.getElementById('input-file');
-    var submitBtn = document.getElementById('submit');
-    var fileListElement = document.getElementById('file-list');
-    var fileSummaryElement = document.getElementById('file-summary');
+    var inputFileBtn = elements.inputFileBtn;
+    var submitBtn = elements.submitBtn;
+    var fileListElement = elements.fileListElement;
+    var fileSummaryElement = elements.fileSummaryElement;
+
     var fileNames = [];
     var fileList = [];
 
@@ -27,16 +28,16 @@ define([
         })
         xhr.open('post', '/upload');
         xhr.onprogress = function (e) {
-
+            console.log((e.loaded * 100 / e.total).toFixed(0))
         }
         xhr.onload = function () {
-
+            console.log(xhr.response)
         }
         xhr.onloadend = function () {
 
         }
-        xhr.onerror = function () {
-
+        xhr.onerror = function (err) {
+            console.error(err)
         }
         xhr.send(formData);
     }
