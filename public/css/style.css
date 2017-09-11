@@ -15,6 +15,7 @@
     display: inline-block;
     width: 80%;
     vertical-align: middle;
+    word-break: break-all;
 }
 
 .file-name+span {
@@ -40,5 +41,4 @@
 
 #file-list {
     max-height: 70%;
-    overflow: scroll
 }
