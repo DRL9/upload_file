@@ -4,7 +4,9 @@
   "description": "upload files to server or PC",
   "main": "server.js",
   "scripts": {
-    "test": "null"
+    "test": "null",
+    "dev": "webpack-dev-server",
+    "build": "webpack --config ./webpack.config.js --progress"
   },
   "repository": {
     "type": "git",
@@ -22,5 +24,12 @@
   "dependencies": {
     "express": "^4.15.4",
     "formidable": "^1.1.1"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-es2015": "^6.24.1",
+    "webpack": "^3.5.6",
+    "webpack-dev-server": "^2.7.1"
   }
 }
