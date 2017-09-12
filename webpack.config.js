@@ -13,8 +13,15 @@ module.exports = {
         contentBase: path.join(__dirname, 'public'),
         port: 8010,
         inline: true,
+        hot: true,
         open: true,
-        openPage: 'upload.html'
+        openPage: 'upload.html',
+        proxy: {
+            '/api': {
+                target: 'http://localhost:8006',
+                pathRewrite: { '^/api': '' }
+            }
+        }
     },
     module: {
         rules: [
@@ -24,5 +31,8 @@ module.exports = {
                 exclude: '/node_modules'
             }
         ]
-    }
+    },
+    plugins: [
+        new webpack.HotModuleReplacementPlugin()
+    ]
 }
