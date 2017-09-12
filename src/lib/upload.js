@@ -55,7 +55,7 @@ function addFiles(file) {
         fileListElement.removeChild(ele);
         fileList.splice(i, 1);
         onFileChange();
-    }, [index, li]));
+    }, index, li));
     fileListElement.appendChild(li);
 
     fileList.push(file);
@@ -70,8 +70,13 @@ function addFiles(file) {
  */
 function createListItem(fileName) {
     var li = document.createElement('li');
-    li.innerHTML = '<span class="file-name">' + fileName + '</span>'
-        + '<span><button class="btn-remove-file"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></span>';
+    li.innerHTML = `<span class="file-name">${fileName}</span>
+                    <span>
+                        <button class="btn-remove-file">
+                            <span class="glyphicon glyphicon-remove" aria-hidden="true">
+                            </span>
+                        </button>
+                    </span>`;
     li.className = 'list-group-item';
     return li;
 }
@@ -79,15 +84,16 @@ function createListItem(fileName) {
 /**
  *
  * @param {Function} fn
- * @param {Array} args
+ * @param {...any} args
+ * @return {Function}
  */
 function prefilling(fn, args) {
-    return function () {
-        fn.apply(this, args.concat(Array.prototype.slice.call(arguments)));
+    return function (...moreArgs) {
+        fn.apply(this, args.concat(moreArgs));
     }
 }
 
 function onFileChange() {
-    fileSummaryElement.innerText = '待上传文件：' + fileList.length;
+    fileSummaryElement.innerText = `待上传文件数：${fileList.length}`;
 }
 onFileChange();
