@@ -4,8 +4,7 @@
   "description": "upload files to server or PC",
   "main": "server.js",
   "scripts": {
-    "test": "null",
-    "build": "node node_modules/requirejs/bin/r.js -o requirejs.build.js"
+    "test": "null"
   },
   "repository": {
     "type": "git",
@@ -22,7 +21,6 @@
   "homepage": "https://github.com/DRL9/upload_file#readme",
   "dependencies": {
     "express": "^4.15.4",
-    "formidable": "^1.1.1",
-    "requirejs": "^2.3.5"
+    "formidable": "^1.1.1"
   }
 }
