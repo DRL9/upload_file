@@ -31,7 +31,7 @@ define([
             console.log((e.loaded * 100 / e.total).toFixed(0))
         }
         xhr.onload = function () {
-            console.log(xhr.response)
+            alert(xhr.response)
         }
         xhr.onloadend = function () {
 
