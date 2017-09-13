@@ -14,4 +14,5 @@ app.post('/upload', upload)
 
 app.listen(PORT, () => {
     console.log(`server start on listen ${PORT}`)
+    console.log(`NODE_ENV = ${process.env.NODE_ENV}`)
 });
