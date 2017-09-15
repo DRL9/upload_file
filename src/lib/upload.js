@@ -1,4 +1,5 @@
-import { inputFileBtn, submitBtn, fileListElement, fileSummaryElement } from 'html-elements'
+import { inputFileBtn, submitBtn, fileListElement, fileSummaryElement } from './html-elements'
+import { prefilling, emptyFn } from './utils'
 
 var fileNames = [];
 var fileList = [];
@@ -14,24 +15,37 @@ inputFileBtn.onchange = function (e) {
 
 submitBtn.onclick = function () {
     var formData = new FormData();
-    var xhr = new XMLHttpRequest();
 
     fileList.forEach(function (file) {
         formData.append(file.name, file);
     })
-    xhr.open('post', '/upload');
-    xhr.onprogress = function (e) {
-        console.log((e.loaded * 100 / e.total).toFixed(0))
-    }
-    xhr.onload = function () {
-        alert(xhr.response)
-    }
-    xhr.onloadend = function () {
 
-    }
-    xhr.onerror = function (err) {
-        console.error(err)
-    }
+    sendFormData(formData, {
+        error: () => { console.error(err) },
+        progress: (e) => { console.log((e.loaded * 100 / e.total).toFixed(0)) },
+        load: (e) => { console.log(e) }
+    });
+}
+
+/**
+ *
+ * @param {FormData} formData
+ * @param {Object} [listeners={}] - XMLHttpRequest的事件监听器
+ * @param {Function} [listeners.progress]
+ * @param {Function} [listeners.load]
+ * @param {Function} [listeners.error]
+ * @param {Function} [listeners.loadend]
+ */
+function sendFormData(formData, listeners = {}) {
+    var xhr = new XMLHttpRequest();
+
+    //监听上传事件
+    Object.keys(listeners).forEach((type) => {
+        let handler = listeners[type];
+        xhr.addEventListener(type, typeof handler === 'function' ? handler : emptyFn);
+    });
+
+    xhr.open('post', '/upload');
     xhr.send(formData);
 }
 
@@ -79,18 +93,6 @@ function createListItem(fileName) {
                     </span>`;
     li.className = 'list-group-item';
     return li;
-}
-
-/**
- *
- * @param {Function} fn
- * @param {...any} args
- * @return {Function}
- */
-function prefilling(fn, ...args) {
-    return function (...moreArgs) {
-        fn.apply(this, args.concat(moreArgs));
-    }
 }
 
 function onFileChange() {
