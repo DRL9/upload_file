@@ -1,5 +1,6 @@
 const path = require('path')
     , express = require('express')
+    , favicon = require('serve-favicon')
     , morgan = require('morgan')
     , upload = require('./lib/middlewares/upload')
     ;
@@ -9,6 +10,7 @@ const app = express(),
 
 const logger = morgan('dev')
 
+app.use(favicon('./favicon.ico'))
 app.use(logger);
 app.use(express.static(path.join(__dirname, 'dist')));
 
