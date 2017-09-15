@@ -1,4 +1,4 @@
-import { inputFileBtn, submitBtn, fileListElement, fileSummaryElement } from './html_elements'
+import { inputFileBtn, submitBtn, fileListElement, fileSummaryElement } from 'html-elements'
 
 var fileNames = [];
 var fileList = [];
