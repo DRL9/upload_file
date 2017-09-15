@@ -1,8 +1,4 @@
-define([
-    './lib/upload',
-    './lib/html_elements'
-], function () {
-    'use strict';
-
-});
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './css/style.css'
+import './lib/upload'
 

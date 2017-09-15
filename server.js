@@ -10,7 +10,7 @@ const app = express(),
 const logger = morgan('dev')
 
 app.use(logger);
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'dist')));
 
 app.post('/upload', upload)
 

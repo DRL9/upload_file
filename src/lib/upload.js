@@ -19,7 +19,7 @@ submitBtn.onclick = function () {
     fileList.forEach(function (file) {
         formData.append(file.name, file);
     })
-    xhr.open('post', '/api/upload');
+    xhr.open('post', '/upload');
     xhr.onprogress = function (e) {
         console.log((e.loaded * 100 / e.total).toFixed(0))
     }
@@ -94,6 +94,6 @@ function prefilling(fn, ...args) {
 }
 
 function onFileChange() {
-    fileSummaryElement.innerText = `待上传文件数liang：${fileList.length}`;
+    fileSummaryElement.innerText = `待上传文件数：${fileList.length}`;
 }
 onFileChange();
