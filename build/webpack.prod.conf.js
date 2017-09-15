@@ -13,6 +13,7 @@ module.exports = merge(baseWebpackConfig, {
         path: path.resolve('dist'),
         filename: 'scripts/[name].[chunkhash].js'
     },
+    devtool: 'source-map',
     module: {
         rules: [
             styleLoaders({ extract: true })
@@ -22,7 +23,9 @@ module.exports = merge(baseWebpackConfig, {
         new CleanWebpackPlugin('./dist', {
             root: path.resolve('./')
         }),
-        new UglifyjsWebpackPlugin(),
+        new UglifyjsWebpackPlugin({
+            sourceMap: true
+        }),
         new ExtractTextWebpackPlugin({
             filename: 'css/[name].[contenthash].css'
         }),

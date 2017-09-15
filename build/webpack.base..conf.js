@@ -21,11 +21,17 @@ module.exports = {
             },
             {
                 test: /\.(woff|woff2|eot|ttf|otf)$/,
-                loader: 'file-loader'
+                loader: 'file-loader',
+                options: {
+                    name: 'fonts/[name].[hash:7].[ext]'
+                }
             },
             {
                 test: /\.(png|jpg|jpeg|gif|svg|ico)$/,
-                loader: 'file-loader'
+                loader: 'file-loader',
+                options: {
+                    name: 'images/[name].[hash:7].[ext]'
+                }
             }
         ]
     },
