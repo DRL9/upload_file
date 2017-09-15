@@ -3,7 +3,7 @@ const webpackHotMiddleware = require('webpack-hot-middleware')
     , webpack = require('webpack')
     , express = require('express')
     , opn = require('opn')
-    , webpackConfig = require('../webpack.config')
+    , webpackConfig = require('./webpack.dev.conf')
     , upload = require('../lib/middlewares/upload')
     ;
 
