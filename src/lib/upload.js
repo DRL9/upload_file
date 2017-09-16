@@ -1,5 +1,6 @@
 import { inputFileBtn, submitBtn, fileListElement, fileSummaryElement } from './html-elements'
 import { prefilling, emptyFn } from './utils'
+import { createFileItemNode } from './dom'
 
 var fileNames = [];
 var fileList = [];
@@ -21,10 +22,51 @@ submitBtn.onclick = function () {
     })
 
     sendFormData(formData, {
-        error: () => { console.error(err) },
-        progress: (e) => { console.log((e.loaded * 100 / e.total).toFixed(0)) },
-        load: (e) => { console.log(e) }
+        error: onUploadError,
+        load: onUploadSuccess,
+        loadstart: onloadstart,
+        loadend: onUploadEnd,
+        progress: onUploadProgress
     });
+}
+
+/**
+ * 上传出错
+ * @param {ErrorEvent} e
+ */
+function onUploadError(e) {
+    console.error(e.error);
+}
+
+/**
+ *
+ * @param {ProgressEvent} e
+ */
+function onUploadProgress(e) {
+
+}
+
+/**
+ * @param {Event} e
+ */
+function onUploadStart(e) {
+
+}
+
+/**
+ *
+ * @param {Event} e
+ */
+function onUploadSuccess(e) {
+
+}
+
+/**
+ * 上传结束后(无论成功与否)
+ * @param {ProgressEvent} e
+ */
+function onUploadEnd(e) {
+
 }
 
 /**
@@ -34,6 +76,7 @@ submitBtn.onclick = function () {
  * @param {Function} [listeners.progress]
  * @param {Function} [listeners.load]
  * @param {Function} [listeners.error]
+ * @param {Function} [listeners.loadstart]
  * @param {Function} [listeners.loadend]
  */
 function sendFormData(formData, listeners = {}) {
@@ -44,7 +87,6 @@ function sendFormData(formData, listeners = {}) {
         let handler = listeners[type];
         xhr.addEventListener(type, typeof handler === 'function' ? handler : emptyFn);
     });
-
     xhr.open('post', '/upload');
     xhr.send(formData);
 }
@@ -62,7 +104,7 @@ function isFileRepeat(fileName) {
  * @param {File} file
  */
 function addFiles(file) {
-    var li = createListItem(file.name);
+    var li = createFileItemNode(file.name);
     var index = fileList.length;//该li插入到ul中的索引
 
     li.lastElementChild.firstElementChild.addEventListener('click', prefilling(function (i, ele) {
@@ -75,24 +117,6 @@ function addFiles(file) {
     fileList.push(file);
     fileNames.push(file.name);
     onFileChange();
-}
-
-/**
- *
- * @param {String} fileName
- * @return {HTMLElement}
- */
-function createListItem(fileName) {
-    var li = document.createElement('li');
-    li.innerHTML = `<span class="file-name">${fileName}</span>
-                    <span>
-                        <button class="btn-remove-file">
-                            <span class="glyphicon glyphicon-remove" aria-hidden="true">
-                            </span>
-                        </button>
-                    </span>`;
-    li.className = 'list-group-item';
-    return li;
 }
 
 function onFileChange() {
