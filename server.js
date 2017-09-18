@@ -3,7 +3,6 @@ const path = require('path')
     , favicon = require('serve-favicon')
     , morgan = require('morgan')
     , upload = require('./lib/middlewares/upload')
-    , morgan = require('morgan')
     ;
 
 const app = express(),
