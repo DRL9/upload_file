@@ -1,0 +1,5 @@
+@import './upload/btn-upload-group.css';
+@import './upload/file-list.css';
+#upload {
+    width: 100%;
+}
