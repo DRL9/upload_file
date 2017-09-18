@@ -106,12 +106,16 @@ function isFileRepeat(fileName) {
 function addFiles(file) {
     var li = createFileItemNode(file.name);
     var index = fileList.length;//该li插入到ul中的索引
+    var uploadControlElement = li.getElementsByClassName('upload-item-control')[0]; //file-item的按钮控制元素
+    uploadControlElement.addEventListener('click', prefilling(function (i, ele, event) {
+        var targetClassList = Array.prototype.slice.call(event.target.classList);
+        if (targetClassList.indexOf('btn-remove-file') >= 0) {
+            fileListElement.removeChild(ele);
+            fileList.splice(i, 1);
+            onFileChange();
+        }
+    }, index, li))
 
-    li.lastElementChild.lastElementChild.lastElementChild.addEventListener('click', prefilling(function (i, ele) {
-        fileListElement.removeChild(ele);
-        fileList.splice(i, 1);
-        onFileChange();
-    }, index, li));
     fileListElement.appendChild(li);
 
     fileList.push(file);
