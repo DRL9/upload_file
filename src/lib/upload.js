@@ -1,5 +1,5 @@
 import { inputFileBtn, submitBtn, fileListElement, fileSummaryElement } from './html-elements'
-import { prefilling, emptyFn, tranferNumberToPercentage } from './utils'
+import { prefilling, emptyFn, tranferNumberToPercentage, transferSizeHumanity } from './utils'
 import { createFileItemNode } from './dom'
 import { addTask, removeTask, isFileRepeat } from './task'
 
@@ -44,9 +44,12 @@ function onUploadError(e) {
 function onUploadProgress(element, e) {
     var completed = tranferNumberToPercentage(e.loaded / e.total);
     element.style.backgroundSize = `${completed} 100%`;
+    var statusElement = element.getElementsByClassName('upload-status')[0];
+    statusElement.innerHTML = `${completed}，已完成${transferSizeHumanity(e.loaded)}， 总共${transferSizeHumanity(e.total)}`;
 }
 
 /**
+ *
  * @param {Event} e
  */
 function onUploadStart(e) {
