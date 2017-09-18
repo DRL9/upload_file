@@ -1,9 +1,10 @@
 import { inputFileBtn, submitBtn, fileListElement, fileSummaryElement } from './html-elements'
-import { prefilling, emptyFn } from './utils'
+import { prefilling, emptyFn, tranferNumberToPercentage } from './utils'
 import { createFileItemNode } from './dom'
 
 var fileNames = [];
 var fileList = [];
+var uploadTaskList = [];
 
 inputFileBtn.onchange = function (e) {
     var files = e.target.files;
@@ -15,7 +16,7 @@ inputFileBtn.onchange = function (e) {
 }
 
 submitBtn.onclick = function () {
-    fileList.forEach(function (file) {
+    uploadTaskList.forEach(({ id, file, element }) => {
         var formData = new FormData();
         formData.append(file.name, file);
         sendFormData(formData, {
@@ -23,7 +24,7 @@ submitBtn.onclick = function () {
             load: onUploadSuccess,
             loadstart: onloadstart,
             loadend: onUploadEnd,
-            progress: onUploadProgress
+            progress: prefilling(onUploadProgress, element)
         });
     });
 }
@@ -38,10 +39,12 @@ function onUploadError(e) {
 
 /**
  *
+ * @param {HTMLElement} element - 上传的文件在DOM中的元素
  * @param {ProgressEvent} e
  */
-function onUploadProgress(e) {
-
+function onUploadProgress(element, e) {
+    var completed = tranferNumberToPercentage(e.loaded / e.total);
+    element.style.backgroundSize = `${completed} 100%`;
 }
 
 /**
@@ -83,7 +86,7 @@ function sendFormData(formData, listeners = {}) {
     //监听上传事件
     Object.keys(listeners).forEach((type) => {
         let handler = listeners[type];
-        xhr.addEventListener(type, typeof handler === 'function' ? handler : emptyFn);
+        xhr.upload.addEventListener(type, typeof handler === 'function' ? handler : emptyFn);
     });
     xhr.open('post', '/upload');
     xhr.send(formData);
@@ -118,6 +121,12 @@ function addFiles(file) {
     fileListElement.appendChild(li);
     fileList.push(file);
     fileNames.push(file.name);
+    uploadTaskList.push({
+        id: Date.now(),
+        file: file,
+        element: li
+    });
+
     onFileChange();
 }
 

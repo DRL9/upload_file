@@ -33,6 +33,16 @@ export function transferSizeHumanity(size, fractionDigits = 2) {
 }
 
 /**
+ * 将数字转换为百分比(带%)
+ * @param {Number} number
+ * @param {Number} [fractionDigits=2] 保留小数位
+ * @return {String}
+ */
+export function tranferNumberToPercentage(number, fractionDigits = 2) {
+    return (number * 100).toFixed(fractionDigits) + '%';
+}
+
+/**
  * 空函数
  */
 export const emptyFn = () => { };
