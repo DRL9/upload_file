@@ -1,14 +1,14 @@
 import { inputFileBtn, submitBtn, fileListElement, fileSummaryElement } from './html-elements'
 import { prefilling, emptyFn, tranferNumberToPercentage } from './utils'
 import { createFileItemNode } from './dom'
+import { addTask, removeTask, isFileRepeat } from './task'
 
-var fileNames = [];
 var uploadTaskList = [];
 
 inputFileBtn.onchange = function (e) {
     var files = e.target.files;
     for (var i = 0; i < files.length; i++) {
-        if (isFileRepeat(files[i].name))
+        if (isFileRepeat(uploadTaskList, files[i].name))
             continue;
         addFiles(files[i]);
     }
@@ -93,42 +93,24 @@ function sendFormData(formData, listeners = {}) {
 
 /**
  *
- * @param {String} fileName
- */
-function isFileRepeat(fileName) {
-    return fileNames.indexOf(fileName) != -1;
-}
-
-/**
- *
  * @param {File} file
  */
 function addFiles(file) {
     var li = createFileItemNode(file.name);
     var uploadControlElement = li.getElementsByClassName('upload-item-control')[0]; //file-item的按钮控制元素
-    var task = {
-        id: Date.now(),
-        file: file,
-        element: li
-    };
+    var task = addTask(uploadTaskList, file, li);
 
     uploadControlElement.addEventListener('click', prefilling(function (task, event) {
         var targetClassList = Array.prototype.slice.call(event.target.classList);
         if (targetClassList.indexOf('btn-remove-file') >= 0) {
-            var index = uploadTaskList.findIndex(function (t) {
-                return t.id == task.id;
-            });
             fileListElement.removeChild(task.element);
-            uploadTaskList.splice(index, 1);
-            fileNames.splice(index, 1);
+            removeTask(uploadTaskList, task);
 
             onFileChange();
         }
     }, task));
 
     fileListElement.appendChild(li);
-    fileNames.push(file.name);
-    uploadTaskList.push(task);
 
     onFileChange();
 }
