@@ -15,18 +15,16 @@ inputFileBtn.onchange = function (e) {
 }
 
 submitBtn.onclick = function () {
-    var formData = new FormData();
-
     fileList.forEach(function (file) {
+        var formData = new FormData();
         formData.append(file.name, file);
-    })
-
-    sendFormData(formData, {
-        error: onUploadError,
-        load: onUploadSuccess,
-        loadstart: onloadstart,
-        loadend: onUploadEnd,
-        progress: onUploadProgress
+        sendFormData(formData, {
+            error: onUploadError,
+            load: onUploadSuccess,
+            loadstart: onloadstart,
+            loadend: onUploadEnd,
+            progress: onUploadProgress
+        });
     });
 }
 
@@ -107,6 +105,7 @@ function addFiles(file) {
     var li = createFileItemNode(file.name);
     var index = fileList.length;//该li插入到ul中的索引
     var uploadControlElement = li.getElementsByClassName('upload-item-control')[0]; //file-item的按钮控制元素
+
     uploadControlElement.addEventListener('click', prefilling(function (i, ele, event) {
         var targetClassList = Array.prototype.slice.call(event.target.classList);
         if (targetClassList.indexOf('btn-remove-file') >= 0) {
@@ -117,7 +116,6 @@ function addFiles(file) {
     }, index, li))
 
     fileListElement.appendChild(li);
-
     fileList.push(file);
     fileNames.push(file.name);
     onFileChange();
