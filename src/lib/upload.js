@@ -3,7 +3,6 @@ import { prefilling, emptyFn, tranferNumberToPercentage } from './utils'
 import { createFileItemNode } from './dom'
 
 var fileNames = [];
-var fileList = [];
 var uploadTaskList = [];
 
 inputFileBtn.onchange = function (e) {
@@ -106,31 +105,35 @@ function isFileRepeat(fileName) {
  */
 function addFiles(file) {
     var li = createFileItemNode(file.name);
-    var index = fileList.length;//该li插入到ul中的索引
     var uploadControlElement = li.getElementsByClassName('upload-item-control')[0]; //file-item的按钮控制元素
-
-    uploadControlElement.addEventListener('click', prefilling(function (i, ele, event) {
-        var targetClassList = Array.prototype.slice.call(event.target.classList);
-        if (targetClassList.indexOf('btn-remove-file') >= 0) {
-            fileListElement.removeChild(ele);
-            fileList.splice(i, 1);
-            onFileChange();
-        }
-    }, index, li))
-
-    fileListElement.appendChild(li);
-    fileList.push(file);
-    fileNames.push(file.name);
-    uploadTaskList.push({
+    var task = {
         id: Date.now(),
         file: file,
         element: li
-    });
+    };
+
+    uploadControlElement.addEventListener('click', prefilling(function (task, event) {
+        var targetClassList = Array.prototype.slice.call(event.target.classList);
+        if (targetClassList.indexOf('btn-remove-file') >= 0) {
+            var index = uploadTaskList.findIndex(function (t) {
+                return t.id == task.id;
+            });
+            fileListElement.removeChild(task.element);
+            uploadTaskList.splice(index, 1);
+            fileNames.splice(index, 1);
+
+            onFileChange();
+        }
+    }, task));
+
+    fileListElement.appendChild(li);
+    fileNames.push(file.name);
+    uploadTaskList.push(task);
 
     onFileChange();
 }
 
 function onFileChange() {
-    fileSummaryElement.innerText = `待上传文件数：${fileList.length}`;
+    fileSummaryElement.innerText = `待上传文件数：${uploadTaskList.length}`;
 }
 onFileChange();
