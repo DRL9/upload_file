@@ -1,27 +1,47 @@
-.file-name {
-    display: inline-block;
-    width: 80%;
+#file-list {
+    margin-bottom: 50px;
+}
+
+#file-list >li {
+    background: linear-gradient( #5cb85c, #5cb85c);
+    background-size: 0 100%;
+    background-repeat: no-repeat;
+}
+
+.file-item {
+    display: table;
+    width: 100%;
+}
+
+.file-item>div {
+    display: table-cell;
     vertical-align: middle;
     word-break: break-all;
 }
 
-.file-name+span {
-    display: inline-block;
-    width: 17%;
-    text-align: center;
+.file-name {
+    font-weight: bold;
 }
 
-.btn-remove-file {
+.upload-status {
+    font-size: .8em;
+    font-style: italic;
+}
+
+.upload-item-control {
+    padding-left: 1em;
+    width: 2em;
+}
+
+.upload-item-control button {
     width: 1.8em;
     height: 1.8em;
     padding: 0;
     border: 1px;
     border-radius: 2em;
-    background: red;
-    color: white;
 }
 
-.btn-remove-file span {
-    vertical-align: middle;
-    padding-bottom: 1px;
+.btn-remove-file {
+    background: red;
+    color: white;
 }

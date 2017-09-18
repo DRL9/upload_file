@@ -107,7 +107,7 @@ function addFiles(file) {
     var li = createFileItemNode(file.name);
     var index = fileList.length;//该li插入到ul中的索引
 
-    li.lastElementChild.firstElementChild.addEventListener('click', prefilling(function (i, ele) {
+    li.lastElementChild.lastElementChild.lastElementChild.addEventListener('click', prefilling(function (i, ele) {
         fileListElement.removeChild(ele);
         fileList.splice(i, 1);
         onFileChange();

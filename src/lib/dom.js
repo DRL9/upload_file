@@ -5,13 +5,16 @@
  */
 export function createFileItemNode(fileName) {
     var li = document.createElement('li');
-    li.innerHTML = `<span class="file-name">${fileName}</span>
-                    <span>
-                        <button class="btn-remove-file">
-                            <span class="glyphicon glyphicon-remove" aria-hidden="true">
-                            </span>
-                        </button>
-                    </span>`;
+    li.innerHTML = `<div class="file-item">
+                        <div>
+                            <div class="file-name">${fileName}</div>
+                            <div class="upload-status"></div>
+                        </div>
+                        <div class="upload-item-control">
+                            <button class="btn-remove-file glyphicon glyphicon-remove" aria-hidden="true">
+                            </button>
+                        </div>
+                    </div>`;
     li.className = 'list-group-item';
     return li;
 }
