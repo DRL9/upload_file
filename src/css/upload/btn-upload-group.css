@@ -1,0 +1,17 @@
+.btn-upload-group {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding-top: 1em;
+}
+
+#input-file {
+    display: none;
+}
+
+@media (max-width:768px) {
+    /* 移动端底部按钮除去paddding, 水平铺满 */
+    .btn-upload-group>div {
+        padding: 0;
+    }
+}

@@ -1,0 +1,27 @@
+.file-name {
+    display: inline-block;
+    width: 80%;
+    vertical-align: middle;
+    word-break: break-all;
+}
+
+.file-name+span {
+    display: inline-block;
+    width: 17%;
+    text-align: center;
+}
+
+.btn-remove-file {
+    width: 1.8em;
+    height: 1.8em;
+    padding: 0;
+    border: 1px;
+    border-radius: 2em;
+    background: red;
+    color: white;
+}
+
+.btn-remove-file span {
+    vertical-align: middle;
+    padding-bottom: 1px;
+}
