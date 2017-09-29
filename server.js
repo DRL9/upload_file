@@ -10,7 +10,7 @@ const app = express(),
 
 const logger = morgan('dev')
 
-app.use(favicon('./favicon.ico'))
+app.use(favicon(path.join(__dirname, 'favicon.ico')));
 app.use(logger);
 app.use(express.static(path.join(__dirname, 'dist')));
 
